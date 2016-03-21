@@ -32,7 +32,7 @@ eventsScreen = function () {
 		logOutOptionButton.on('click', processLogOutOption);
 		
 		// log out event menu option button click
-		menuAddEventOptionButton.on('click', processLogOutOption);
+		menuLogOutOptionButton.on('click', processLogOutOption);
     };
 	
 	// function to process add event option
