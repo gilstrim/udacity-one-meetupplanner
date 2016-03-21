@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>EVENT.PLANNER</title>
+
+    <!-- CSS References -->        
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="screen">
+    <!-- build:css css/vendor/materialize.min.css -->
+    <link href="css/vendor/materialize.css" type="text/css" rel="stylesheet" media="screen" />
+    <!-- /build -->
+	<!-- build:css css/vendor/animate.min.css -->
+    <link href="css/vendor/animate.css" rel="stylesheet" />
+    <!-- /build -->
+    <!-- build:css css/vendor/bootstrap-material-datetimepicker.min.css -->
+    <link href="css/vendor/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+    <!-- /build -->
+    <!-- build:css css/style.min.css -->
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen" />
+    <!-- /build -->
+</head>
+<body class="white full">
+
+    <!--Header-->
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">			
+            <a id="logo-container" href="index.html" class="brand-logo grey-text text-darken-3 thin left">EVENT.PLANNER</a>
+            <ul class="right hide-on-med-and-down black-text">
+				<li><a href="#" id="btnMenuAddEventOption"><i class="material-icons left">playlist_add</i>ADD.EVENT</a></li>				
+				<li><a href="#" id="btnMenuLogOutOption"><i class="material-icons left">open_in_browser</i>LOG.OUT</a></li>								
+			</ul>
+        </div>
+    </nav>
+	
+	<div class="row"></div>
+	
+	<div class="cardContainer">		
+		
+		<!-- Options Card -->
+		<div class="row" id="optionsCard">
+			<div class="col s12 container">				
+				<div class="card-panel hoverable z-depth-3">
+					<h4 class="header center grey-text text-darken-3 thin">EVENT.OPTIONS</h4>	
+					<br />					
+					<div class="row center">							
+						<a class="waves-effect waves-light btn-large" id="btnAddEventOption" href="#"><i class="material-icons right">playlist_add</i>ADD.EVENT</a>						
+						<a class="waves-effect waves-light btn-large" id="btnLogOutOption" href="#"><i class="material-icons right">open_in_browser</i>LOG.OUT</a>
+					</div>
+				</div> 
+			</div>
+		</div>
+		
+		<!-- Add Event Card -->
+		<div class="row" id="addEventCard">
+			<div class="col s12 container">				
+				<div class="card-panel hoverable z-depth-3">
+					<h4 class="header center grey-text text-darken-3 thin">ADD.EVENT</h4>
+									
+					<form class="col s12" id="addEventForm" novalidate autocomplete="on" onsubmit="return false;">
+						<div class="row">
+							<div class="input-field col s12 m6" style="margin-bottom: 20px;">
+								<i class="material-icons prefix">redeem</i>
+								<input placeholder="30th Birthday Party" id="txtEventName" type="text" class="validate" required="required">
+								<label for="txtEventName">Event Name *</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">list</i>
+								<input placeholder="Award Ceremony" id="cboEventType" type="text" class="validate tooltipped" required="required" data-position="top" data-delay="50" data-tooltip="Type to load input options or enter a custom event type...">
+								<label for="cboEventType">Type of Event *</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12 m6" style="margin-bottom: 20px;">
+								<i class="material-icons prefix">contacts</i>
+								<input placeholder="John Doe" id="txtEventHost" type="text" class="validate" required="required" name="name" autocomplete="name">
+								<label for="txtEventHost">Event Host *</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">today</i>
+								<input placeholder="01/03/2016 12:00" id="txtEventStartDate" type="text" class="datepicker validate" required="required">
+								<label for="txtEventStartDate">Start Date and Time *</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12 m6" style="margin-bottom: 20px;">
+								<i class="material-icons prefix">today</i>
+								<input placeholder="02/03/2016 12:00" id="txtEventEndDate" type="text" class="datepicker validate" required="required">
+								<label for="txtEventEndDate">End Date and Time *</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix teal-text">supervisor_account</i>
+								<textarea class="materialize-textarea validate" id="txtEventGuestList" required="required" placeholder="John Doe, Joe Bloggs"></textarea>
+								<label for="txtEventGuestList">Guest List *</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12 m6" style="margin-bottom: 20px;">
+								<i class="material-icons prefix">my_location</i>
+								<input placeholder="5 Smith Road, Bedfordview, South Africa" id="txtEventLocation" type="text" class="validate" onfocus="geolocate();" required="required">
+								<label for="txtEventLocation">Location *</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix teal-text">message</i>
+								<textarea id="txtEventMessage" class="materialize-textarea" placeholder="Dress smart-casual"></textarea>
+								<label for="txtEventMessage">Message to Guests</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="card-panel green lighten-3" id="divAddEventSuccessMessage">Success! Your event has been created. Create another event or press the back button or logo to return to the main page.</div>
+							<div class="card-panel red lighten-2" id="divAddEventErrorMessage">Oops! An error occurred creating your event. Please try again.</div>
+						</div>
+						<div class="row center">		
+							<a class="waves-effect waves-light btn-large" id="btnCloseEvent" href="#"><i class="material-icons right">not_interested</i>CLOSE</a>
+							<button class="waves-effect waves-light btn-large" type="submit" name="action" id="btnAddEvent">ADD.EVENT<i class="material-icons right">send</i></button>
+						</div>
+					</form>							
+					<div class="row center">						
+					</div>
+				</div> 
+			</div>
+		</div>
+				
+		<!-- View Events Panel -->
+		<div class="row">
+			<div class="section">
+				<div id="viewEventsPanel">			
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- JS Scripts-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>    
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvuhNpk_4VH5iBuDZZaQqC1ERnf2Iq48k&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
+	
+    <!-- build:js js/vendor/google-places-api.min.js -->   
+    <script src="js/vendor/google-places-api.js"></script>
+    <!-- /build -->
+    <!-- build:js js/vendor/fuzzy-autocomplete.min.js -->   
+    <script src="js/vendor/fuzzy-autocomplete.js"></script>
+    <!-- /build -->
+    <!-- build:js js/vendor/bootstrap-material-datetimepicker.min.js -->   
+    <script src="js/vendor/bootstrap-material-datetimepicker.js"></script> 
+    <!-- /build -->
+    <!-- build:js js/static/eventTypes.min.js -->   
+    <script src="js/static/eventTypes.js"></script>
+    <!-- /build -->
+    <!-- build:js js/validation.min.js -->
+    <script src="js/validation.js"></script>
+    <!-- /build -->
+    <!-- build:js js/addEvent.min.js -->
+    <script src="js/addEvent.js"></script>  
+    <!-- /build -->
+	<!-- build:js js/viewEvents.min.js -->
+    <script src="js/viewEvents.js"></script>  
+    <!-- /build -->
+	<!-- build:js js/events.min.js -->
+    <script src="js/events.js"></script>  
+    <!-- /build -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // implement events functionality
+            eventsScreen.initPage();
+			
+			// implement add event functionality
+            addEventScreen.initPage();
+			
+			// implement view event functionality
+            viewEventsScreen.initPage();
+        });
+    </script>
+</body>
+</html>

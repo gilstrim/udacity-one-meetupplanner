@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>EVENT.PLANNER</title>
+
+    <!-- CSS References -->        
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="screen">
+    <!-- build:css css/vendor/materialize.min.css -->
+    <link href="css/vendor/materialize.css" type="text/css" rel="stylesheet" media="screen" />
+    <!-- /build -->
+	<!-- build:css css/vendor/animate.min.css -->
+    <link href="css/vendor/animate.css" rel="stylesheet" />
+    <!-- /build -->
+	<!-- build:css css/vendor/bootstrap-material-datetimepicker.min.css -->
+    <link href="css/vendor/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+    <!-- /build -->
+    <!-- build:css css/style.min.css -->
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen" />
+    <!-- /build -->
+</head>
+<body class="white full">
+
+    <!--Header-->
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">			
+            <a id="logo-container" href="index.html" class="brand-logo grey-text text-darken-3 thin left">MY.EVENT.PLANNER</a>
+            <ul class="right hide-on-med-and-down" id="screenBanner"></ul>
+        </div>
+    </nav>
+	
+	<div class="row"></div>	
+	
+	<!-- Card Container -->
+	<div class="cardContainer">		
+		
+		<!-- Login Card -->
+		<div class="row" id="loginCard">
+			<div class="col s12 container">				
+				<div class="card-panel hoverable z-depth-3">
+					<h4 class="header center grey-text text-darken-3 thin">LOGIN</h4>
+					<form id="loginForm" class="col s12" novalidate="novalidate" autocomplete="on" onsubmit="return false;">
+						<div class="row">
+							<div class="input-field col s12">						
+								<i class="material-icons prefix">email</i>						
+								<input id="txtLoginEmail" type="email" name="email" class="validate" placeholder="john.doe@gmail.com" required="required" autocomplete="email">
+								<label for="txtLoginEmail" data-error="Invalid email address format." data-success="Valid email address format.">Email Address</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">https</i>
+								<input id="txtLoginPassword" name="password" type="password" class="validate" placeholder="password" required="required" autocomplete="new-password">
+								<label for="txtLoginPassword">Password</label>
+							</div> 					
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<input type="checkbox" class="filled-in" id="ckLoginAutoLogin" checked="checked" />
+								<label for="ckLoginAutoLogin">Remember me to login automatically?</label>
+							</div>
+						</div>
+						<div class="row"></div>
+						<div class="row">                    
+							<div class="card-panel red lighten-2" id="divLoginErrorMessage">Oops! Invalid login. Please try again.</div>
+						</div>
+						<div class="row center">
+							<button class="waves-effect waves-light btn-large" type="submit" name="action" id="btnLogin">LOGIN<i class="material-icons right">send</i></button>                        							
+						</div>				
+					</form>					
+					<div class="row center">
+						<h6 class="header center black-text thin">New user? Click <a href="#" id="lnkRegisterHere">here</a> to register.</h5>			
+					</div>
+				</div> 
+			</div>
+		</div>
+		
+		<!-- Registration Card -->
+		<div class="row" id="registrationCard">
+			<div class="col s12 container">
+				<div class="card-panel hoverable z-depth-3">
+					<h4 class="header center grey-text text-darken-3 thin">REGISTER</h4>
+										
+					<form id="registerForm" class="col s12" novalidate="novalidate" autocomplete="on" onsubmit="return false;">
+						<div class="row">
+							<div class="input-field col s12 m12" style="margin-bottom: 20px;">
+								<i class="material-icons prefix">perm_identity</i>
+								<input placeholder="John Doe" id="txtRegisterName" type="text" class="validate" required="required" name="name" autocomplete="name" />
+								<label for="txtRegisterName">Name *</label>
+							</div>
+							<div class="input-field col s12 m12">
+								<i class="material-icons prefix">email</i>
+								<input id="txtRegisterEmail" type="email" class="validate" placeholder="john.doe@gmail.com" required="required" name="email" autocomplete="email" />
+								<label for="txtRegisterEmail">Email Address *</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">https</i>
+								<input placeholder="Password" id="txtRegisterPassword" type="password" class="validate" required="required" name="password" autocomplete="new-password" />
+								<label for="txtRegisterPassword">Password *</label>
+							</div>
+							<div class="input-field col s12 m6" style="padding-left: 30px;" id="divPasswordStrength">
+								<input type="checkbox" id="ckRegisterPasswordMinChars" disabled="disabled" />
+								<label for="ckRegisterPasswordMinChars">Minimum of 8 Chracters</label>
+								<br />
+								<input type="checkbox" id="ckRegisterPasswordHasNumber" disabled="disabled" />
+								<label for="ckRegisterPasswordHasNumber">Includes a number</label>
+								<br />
+								<input type="checkbox" id="ckRegisterPasswordHasSpecial" disabled="disabled" />
+								<label for="ckRegisterPasswordHasSpecial">Includes a special character</label>
+								<br />
+								<input type="checkbox" id="ckRegisterPasswordHasCapital" disabled="disabled" />
+								<label for="ckRegisterPasswordHasCapital">Includes a capital letter</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">redeem</i>
+								<input placeholder="01/01/1990" id="txtRegisterBirthday" type="text" class="validate datepicker" name="bday" autocomplete="bday">
+								<label for="txtRegisterBirthday">Birthday</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">supervisor_account</i>
+								<input placeholder="American" id="txtRegisterNationality" type="text" class="validate tooltipped" data-position="right" data-delay="50" data-tooltip="Type to load input options..." name="country-name" autocomplete="country-name">
+								<label for="txtRegisterNationality">Nationality</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<input type="checkbox" class="filled-in" id="ckRegisterAutoLogin" checked="checked" />
+								<label for="ckRegisterAutoLogin">Use my profile to login automatically?</label>
+							</div>
+						</div>						
+						<br />
+						<div class="row">							
+							<div class="card-panel red lighten-2" id="divRegisterErrorMessage">Oops! An error occurred creating your account. Please try again.</div>
+						</div>
+						<div class="row center">							
+							<a class="waves-effect waves-light btn-large" id="btnBack" href="./index.html"><i class="material-icons right">replay</i>BACK</a>
+							<button class="waves-effect waves-light btn-large" type="submit" name="action" id="btnRegister">REGISTER<i class="material-icons right">send</i></button>                        
+						</div>	
+					</form>
+					<div class="row"></div>
+				</div> 
+			</div>
+		</div>		
+		
+	</div>
+
+    <!-- JS Scripts-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>     
+	
+	<!-- build:js js/vendor/fuzzy-autocomplete.min.js -->   
+    <script src="js/vendor/fuzzy-autocomplete.js"></script>
+    <!-- /build -->
+    <!-- build:js js/vendor/bootstrap-material-datetimepicker.min.js -->   
+    <script src="js/vendor/bootstrap-material-datetimepicker.js"></script> 
+    <!-- /build -->
+    <!-- build:js js/static/countries.min.js --> 
+    <script src="js/static/countries.js"></script>
+    <!-- /build -->	
+    <!-- build:js js/validation.min.js -->
+    <script src="js/validation.js"></script>
+    <!-- /build -->
+	<!-- build:js js/register.min.js -->
+    <script src="js/register.js"></script>    
+    <!-- /build -->
+	<!-- build:js js/login.min.js -->
+    <script src="js/login.js"></script>    
+    <!-- /build -->	
+    <!-- build:js js/index.min.js -->
+    <script src="js/index.js"></script>
+    <!-- /build -->    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // implement index functionality
+            index.initPage();            
+        });
+    </script>
+</body>
+</html>
