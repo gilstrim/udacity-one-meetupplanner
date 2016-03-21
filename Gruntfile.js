@@ -87,20 +87,30 @@ module.exports = function(grunt) {
 					dest: 'dist/'	
 				}]
 			}
+		},
+		
+		// copy job for fonts
+		copy: {
+			main: {
+				files: [					
+					{expand: true, cwd: 'src/font/', src: ['**'], dest: 'dist/font'}			
+				]
+			}
 		}
-	});
+	});	
 
 	// development tasks
 	grunt.registerTask('dev', ['browserSync']);
 	
 	// production tasks
-	grunt.registerTask('release', ['jshint','uglify','cssmin','imagemin','processhtml']);
+	grunt.registerTask('release', ['jshint','uglify','cssmin','imagemin','processhtml','copy']);
 
 	// load tasks 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
-	grunt.loadNpmTasks('grunt-contrib-jshint');	
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-copy');	
 	grunt.loadNpmTasks('grunt-browser-sync');
-	grunt.loadNpmTasks('grunt-processhtml');
+	grunt.loadNpmTasks('grunt-processhtml');	
 };
