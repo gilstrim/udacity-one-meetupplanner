@@ -11,7 +11,8 @@ registrationScreen = function () {
     var registrationName = $('#txtRegisterName');
     var registrationEmail = $('#txtRegisterEmail');
     var registrationPassword = $('#txtRegisterPassword');
-    var registrationBirthday = $('#txtRegisterBirthday');
+    var registrationMobileBirthday = $('#txtRegisterMobileBirthday');
+    var registrationDesktopBirthday = $('#txtRegisterDesktopBirthday');
     var registrationNationality = $('#txtRegisterNationality');
     var registrationPasswordMinChars = $('#ckRegisterPasswordMinChars');
     var registrationPasswordHasNumber = $('#ckRegisterPasswordHasNumber');
@@ -28,25 +29,55 @@ registrationScreen = function () {
         // implement auto complete functionality for nationality
         fuzzyAutocomplete(registrationNationality, countryData);
 
-        // configure material date time picker for start date time
-        registrationBirthday.bootstrapMaterialDatePicker
-		({
-		    format: 'DD/MM/YYYY',
-		    time: false,
-		    minDate: '01/01/1900',
-            maxDate: new Date()
-		});
-
-        // set focus to first field
-        registrationName.focus();
+        // process date fields on the page
+        processDates();        		
 
         // validate form on load
         formValidation.initPage('#registerForm');
 
         // hide feedback messages
         registrationSuccessMessage.hide();
-        registrationErrorMessage.hide();                
+        registrationErrorMessage.hide();
     };
+
+    // function to process date fields
+    var processDates = function () {
+
+        // configure material date time picker for start date time
+        registrationMobileBirthday.bootstrapMaterialDatePicker
+        ({
+            format: 'YYYY-MM-DD',
+            time: false,
+            minDate: '1900-12-01',
+            maxDate: new Date()
+        }); 
+
+        // hide / show dates based on screen size
+        var mediaQuery = window.matchMedia("only screen and (min-width: 993px)");
+        mediaQuery.addListener(hideShowDates);
+        hideShowDates(mediaQuery);
+    };
+
+    // function to hide or show date fields
+    var hideShowDates = function (mediaQuery) {
+        // if media query is met
+        if (mediaQuery.matches) 
+        {
+            // show desktop date field
+            registrationDesktopBirthday.parent().show();
+
+            // hide mobile date field
+            registrationMobileBirthday.parent().hide();
+        } 
+        else 
+        {
+            // hide desktop date field
+            registrationDesktopBirthday.parent().hide();
+
+            // show mobile date field
+            registrationMobileBirthday.parent().show();
+        }
+    }
 
     // function to hook events
     var hookEvents = function () {
@@ -76,7 +107,7 @@ registrationScreen = function () {
                 name: registrationName.val(),
                 emailAddress: registrationEmail.val(),
                 password: registrationPassword.val(),
-                birthday: registrationBirthday.val(),
+                birthday: registrationMobileBirthday.val(),
                 nationality: registrationNationality.val(),
                 autoLogin: registrationAuto.is(':checked')
             };

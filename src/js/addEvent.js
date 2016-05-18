@@ -13,44 +13,86 @@ addEventScreen = function () {
     var eventName = $('#txtEventName');
     var eventType = $('#cboEventType');
     var eventHost = $('#txtEventHost');
-    var eventStartDate = $('#txtEventStartDate');
-    var eventEndDate = $('#txtEventEndDate');
+    var eventMobileStartDate = $('#txtMobileEventStartDate');
+    var eventDesktopStartDate = $('#txtDesktopEventStartDate');
+    var eventMobileEndDate = $('#txtMobileEventEndDate');
+    var eventDesktopEndDate = $('#txtDesktopEventEndDate');
     var eventGuestList = $('#txtEventGuestList');
     var eventLocation = $('#txtEventLocation');
     var eventMessage = $('#txtEventMessage');
     var addEventSuccessMessage = $("#divAddEventSuccessMessage");
     var addEventErrorMessage = $("#divAddEventErrorMessage");
 	var viewEventsPanel = $("#viewEventsPanel");          
+    var isMobile = false;
 
     // function to initialise the page
     var initPage = function () {        
         // hook events
         hookEvents();
 
-        // configure material date time picker for start date time
-        eventStartDate.bootstrapMaterialDatePicker
-		({
-		    format: 'DD/MM/YYYY HH:mm',
-		    minDate: new Date()
-		});
-
-        // configure material date time picker for end date time
-        eventEndDate.bootstrapMaterialDatePicker
-		({
-		    format: 'DD/MM/YYYY HH:mm',
-		    minDate: new Date()		    
-		});
-
         // check validity of form
         formValidation.initPage('#addEventForm');
 		
-        // set focus to first field
-        eventName.focus();
+        // process date fields on the page
+        processDates();             
 
         // hide feedback messages
         addEventSuccessMessage.hide();
         addEventErrorMessage.hide();
     };
+
+    // function to process date fields
+    var processDates = function () {
+        // configure material date time picker for start date time
+        eventMobileStartDate.bootstrapMaterialDatePicker
+        ({
+            format: 'YYYY-MM-DD[T]HH:mm',
+            minDate: new Date()
+        });
+
+        // configure material date time picker for end date time
+        eventMobileEndDate.bootstrapMaterialDatePicker
+        ({
+            format: 'YYYY-MM-DD[T]HH:mm',
+            minDate: new Date()         
+        });
+
+        // hide / show dates based on screen size
+        var mediaQuery = window.matchMedia("only screen and (min-width: 993px)");
+        mediaQuery.addListener(hideShowDates);
+        hideShowDates(mediaQuery);
+    };
+
+    // function to hide or show date fields
+    var hideShowDates = function (mediaQuery) {
+        // if media query is met
+        if (mediaQuery.matches) 
+        {
+            // show desktop date field
+            eventDesktopStartDate.parent().show();
+            eventDesktopEndDate.parent().show();
+
+            // hide mobile date field
+            eventMobileStartDate.parent().hide();
+            eventMobileEndDate.parent().hide();
+
+            // set is mobile
+            isMobile = false;
+        } 
+        else 
+        {
+            // hide desktop date field
+            eventDesktopStartDate.parent().hide();
+            eventDesktopEndDate.parent().hide();
+
+            // show mobile date field
+            eventMobileStartDate.parent().show();
+            eventMobileEndDate.parent().show();
+
+            // set is mobile
+            isMobile = true;
+        }
+    }
 
     // function to hook events
     var hookEvents = function () {        
@@ -58,10 +100,12 @@ addEventScreen = function () {
         eventAddButton.on('click', addEvent);
 
         // add event start date validation
-        eventStartDate.on('change', function () { validateStartEndDates(); });
+        eventMobileStartDate.on('change', function () { validateStartEndDates(); });
+        eventDesktopStartDate.on('change', function () { validateStartEndDates(); });
 
         // add event end date validation
-        eventEndDate.on('change', function () { validateStartEndDates(); });
+        eventMobileEndDate.on('change', function () { validateStartEndDates(); });
+        eventDesktopEndDate.on('change', function () { validateStartEndDates(); });
 
 		// close event button click
 		eventCloseButton.on('click', closeEvent);
@@ -90,8 +134,8 @@ addEventScreen = function () {
                 eventName: eventName.val(),
                 eventType: eventType.val(),
                 eventHost: eventHost.val(),
-                eventStartDate: eventStartDate.val(),
-                eventEndDate: eventEndDate.val(),
+                eventStartDate: isMobile ? eventMobileStartDate.val() : eventDesktopStartDate.val(),
+                eventEndDate: isMobile ? eventMobileEndDate.val() : eventDesktopEndDate.val(),
                 eventGuestList: eventGuestList.val(),
                 eventLocation: eventLocation.val(),
                 eventMessage: eventMessage.val(),
@@ -133,11 +177,13 @@ addEventScreen = function () {
     // function to validate start and end date
     var validateStartEndDates = function () {
         // initialise variables
-        var endDateValue = eventEndDate.val();
-        var startDateValue = eventStartDate.val();
+        var eventStartDate = isMobile ? eventMobileStartDate : eventDesktopStartDate;
+        var eventEndDate = isMobile ? eventMobileEndDate : eventDesktopEndDate;
+        var endDateValue = isMobile ? eventMobileEndDate.val() : eventDesktopEndDate.val();
+        var startDateValue = isMobile ? eventMobileStartDate.val() : eventDesktopStartDate.val();
         var isEndDateValid = eventEndDate[0].checkValidity();
         var isStartDateValid = eventStartDate[0].checkValidity();
-        var isEndDateAfterStartDate = moment(endDateValue, 'DD/MM/YYYY HH:mm').isAfter(moment(startDateValue, 'DD/MM/YYYY HH:mm'));
+        var isEndDateAfterStartDate = moment(endDateValue).isAfter(moment(startDateValue));
 
         // verify if password meets all relevant criteria and display relevant error messages
         if (isEndDateValid && startDateValue && endDateValue !== '' && startDateValue !== '' && !isEndDateAfterStartDate) {

@@ -10,6 +10,7 @@ eventsScreen = function () {
 	var menuAddEventOptionButton = $("#btnMenuAddEventOption");	
 	var menuLogOutOptionButton = $("#btnMenuLogOutOption");	
 	var logOutOptionButton = $("#btnLogOutOption");
+	var eventName = $('#txtEventName');
 
     // function to initialise the page
     var initPage = function () {        
@@ -37,7 +38,12 @@ eventsScreen = function () {
 	
 	// function to process add event option
 	var processAddEventOption = function() {
-		addEventCard.addClass('animated fadeIn').show();			
+		// fade in event addition card
+		addEventCard.addClass('animated fadeIn').show();
+
+		// set focus to first field
+		eventName.focus();
+        eventName.click();			
 	};
 	
 	// function to process log out option

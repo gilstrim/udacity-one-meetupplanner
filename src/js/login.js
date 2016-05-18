@@ -14,7 +14,8 @@ loginScreen = function () {
 	var loginPassword = $('#txtLoginPassword');
 	var loginRegisterHyperlink = $("#lnkRegisterHere");    
 	var loginUsername = $('#txtLoginEmail');
-	var registrationCard = $("#registrationCard");	
+	var registrationCard = $("#registrationCard");
+	var registrationName = $('#txtRegisterName');	
 
     // function to initialise the page
     var initPage = function () {
@@ -28,12 +29,15 @@ loginScreen = function () {
 			window.location.href = './events.html';
 		}
 		else
-		{
+		{			
 			// hook events
 			hookEvents();
 			
 			// hide error message
 			loginErrorMessage.hide();
+
+			// set focus to email field
+			loginUsername.click();
 		}
     };
 
@@ -63,7 +67,11 @@ loginScreen = function () {
 			registrationCard.addClass('animated fadeIn').show();				
 			
 			// remove animated class
-			loginCard.removeClass('animated fadeOut');				
+			loginCard.removeClass('animated fadeOut');			
+
+			// set focus to first field        
+			registrationName.focus();
+        	registrationName.click();	
 		});		
 	};
 	

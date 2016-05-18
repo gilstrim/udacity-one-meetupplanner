@@ -44,7 +44,7 @@
 						<div class="row">
 							<div class="input-field col s12">						
 								<i class="material-icons prefix">email</i>						
-								<input id="txtLoginEmail" type="email" name="email" class="validate" placeholder="john.doe@gmail.com" required="required" autocomplete="email">
+								<input id="txtLoginEmail" type="email" name="email" class="validate" placeholder="john.doe@gmail.com" required="required" autocomplete="email" autofocus>
 								<label for="txtLoginEmail" data-error="Invalid email address format." data-success="Valid email address format.">Email Address</label>
 							</div>
 						</div>
@@ -86,7 +86,7 @@
 						<div class="row">
 							<div class="input-field col s12 m12" style="margin-bottom: 20px;">
 								<i class="material-icons prefix">perm_identity</i>
-								<input placeholder="John Doe" id="txtRegisterName" type="text" class="validate" required="required" name="name" autocomplete="name" />
+								<input placeholder="John Doe" id="txtRegisterName" type="text" class="validate" required="required" name="name" autocomplete="name" autofocus/>
 								<label for="txtRegisterName">Name *</label>
 							</div>
 							<div class="input-field col s12 m12">
@@ -118,8 +118,13 @@
 						<div class="row">
 							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">redeem</i>
-								<input placeholder="01/01/1990" id="txtRegisterBirthday" type="text" class="validate datepicker" name="bday" autocomplete="bday">
-								<label for="txtRegisterBirthday">Birthday</label>
+								<input placeholder="01/01/1990" id="txtRegisterDesktopBirthday" type="date" class="validate datepicker" name="bday" autocomplete="bday">
+								<label for="txtRegisterDesktopBirthday">Birthday</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">redeem</i>
+								<input placeholder="01/01/1990" id="txtRegisterMobileBirthday" type="date" class="validate" name="bday" autocomplete="bday">
+								<label for="txtRegisterMobileBirthday">Birthday</label>
 							</div>
 							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">supervisor_account</i>
@@ -151,7 +156,7 @@
 
     <!-- JS Scripts-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script> 
+    <script src="js/vendor/materialize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>     
 	
 	<!-- build:js js/vendor/fuzzy-autocomplete.min.js -->   

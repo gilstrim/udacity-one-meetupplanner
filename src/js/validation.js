@@ -11,7 +11,7 @@ formValidation = function () {
          var isFieldValid = true;
 
          // validate required fields
-         $(formId + ' input[required],' + formId + ' select[required],' + formId + ' textarea[required]').each(function () {
+         $(formId + ' input[required]:visible,' + formId + ' select[required],' + formId + ' textarea[required]').each(function () {
              var isFieldValid = $(this)[0].checkValidity() && ($(this).val() !== '' || (this.nodeName === 'SELECT' && $('#' + $(this).attr('id') + ' option:selected').val() !== ''));
 
              if (!isFieldValid) {                                     

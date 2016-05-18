@@ -61,7 +61,7 @@
 						<div class="row">
 							<div class="input-field col s12 m6" style="margin-bottom: 20px;">
 								<i class="material-icons prefix">redeem</i>
-								<input placeholder="30th Birthday Party" id="txtEventName" type="text" class="validate" required="required">
+								<input placeholder="30th Birthday Party" id="txtEventName" type="text" class="validate" required="required" autofocus>
 								<label for="txtEventName">Event Name *</label>
 							</div>
 							<div class="input-field col s12 m6">
@@ -78,15 +78,25 @@
 							</div>
 							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">today</i>
-								<input placeholder="01/03/2016 12:00" id="txtEventStartDate" type="text" class="datepicker validate" required="required">
-								<label for="txtEventStartDate">Start Date and Time *</label>
+								<input placeholder="01/03/2016 12:00" id="txtMobileEventStartDate" type="datetime-local" class="datepicker validate" required="required">
+								<label for="txtMobileEventStartDate">Start Date and Time *</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">today</i>
+								<input placeholder="01/03/2016 12:00" id="txtDesktopEventStartDate" type="datetime-local" class="datepicker validate" required="required">
+								<label for="txtDesktopEventStartDate">Start Date and Time *</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s12 m6" style="margin-bottom: 20px;">
 								<i class="material-icons prefix">today</i>
-								<input placeholder="02/03/2016 12:00" id="txtEventEndDate" type="text" class="datepicker validate" required="required">
-								<label for="txtEventEndDate">End Date and Time *</label>
+								<input placeholder="02/03/2016 12:00" id="txtMobileEventEndDate" type="datetime-local" class="datepicker validate" required="required">
+								<label for="txtMobileEventEndDate">End Date and Time *</label>
+							</div>
+							<div class="input-field col s12 m6" style="margin-bottom: 20px;">
+								<i class="material-icons prefix">today</i>
+								<input placeholder="02/03/2016 12:00" id="txtDesktopEventEndDate" type="datetime-local" class="datepicker validate" required="required">
+								<label for="txtDesktopEventEndDate">End Date and Time *</label>
 							</div>
 							<div class="input-field col s12 m6">
 								<i class="material-icons prefix teal-text">supervisor_account</i>
@@ -132,7 +142,7 @@
 
     <!-- JS Scripts-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script> 
+    <script src="js/vendor/materialize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>    
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvuhNpk_4VH5iBuDZZaQqC1ERnf2Iq48k&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
 	
