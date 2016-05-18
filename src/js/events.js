@@ -43,7 +43,11 @@ eventsScreen = function () {
 
 		// set focus to first field
 		eventName.focus();
-        eventName.click();			
+        eventName.click();		
+
+        
+        // check validity of form
+        formValidation.initPage('#addEventForm');	
 	};
 	
 	// function to process log out option
