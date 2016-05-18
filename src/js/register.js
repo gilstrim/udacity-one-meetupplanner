@@ -77,7 +77,7 @@ registrationScreen = function () {
             // show mobile date field
             registrationMobileBirthday.parent().show();
         }
-    }
+    };
 
     // function to hook events
     var hookEvents = function () {

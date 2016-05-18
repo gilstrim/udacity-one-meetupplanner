@@ -92,7 +92,7 @@ addEventScreen = function () {
             // set is mobile
             isMobile = true;
         }
-    }
+    };
 
     // function to hook events
     var hookEvents = function () {        
